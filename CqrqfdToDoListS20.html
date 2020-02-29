@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+Name: Carson Rottinghaus
+Pawprint: Cqrqfd
+Date: 2/28/20
+Challenge: To-Do List S20
+-->
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <style>
+            body{
+                background-color: white; !important;
+            }
+            #back{
+                float: left;
+            }
+            #theme{
+                float: right;
+            }
+            h1{
+                margin: 0 auto;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                text-align: center;
+            }
+            .tableDiv{
+                margin: 0 auto;
+                width: 80%;
+                height: 50%
+            }
+            .formContainer{
+                margin: 0 auto;
+                width: 80%;
+                height: 50%;
+                justify-content: space-between;
+            }
+            .formDiv{
+                display: flex;
+                justify-content: space-between;
+            }
+            .buttonStyle{
+                margin-right: 20px;
+            }
+            table{
+                table-layout: fixed;
+                
+            }
+            td{
+                width: 400px;
+            }
+        </style>
+        <script>
+            var darkMode = false;
+            
+            function newElement(){
+                var tableRef = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+                
+                var titleText = document.getElementById("title").value;
+                var typeText = document.getElementById("type").value;
+                var dateText = document.getElementById("date").value;
+                var newRow = tableRef.insertRow();
+                var titleCell = newRow.insertCell(0);
+                var typeCell = newRow.insertCell(1);
+                var dateCell = newRow.insertCell(2);
+                var actionCell = newRow.insertCell(3);
+                titleCell.append(titleText);
+                typeCell.append(typeText);
+                dateCell.append(dateText);
+            }
+            
+            function toggleTheme(){
+                
+                if(darkMode) {
+                    document.getElementById("myTable").classList.remove('table-dark');
+                    document.body.style.backgroundColor = "#FFFFFF";
+                    darkmode = false;
+                }
+                
+                else{
+                    document.getElementById("myTable").classList.add('table-dark');
+                    document.body.style.backgroundColor = "#333";
+                    darkMode = true;
+                }
+            }
+            
+        </script>
+        <title>To do list</title>
+    </head>
+    <body>
+        <button id="back" type="button">Back</button>
+        <button id="theme" onclick="toggleTheme()" type="button">Change Theme</button>
+        <h1>To-Do List</h1>
+        <div class="tableDiv">
+            <table id="myTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th> Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="formContainer">
+            <form class=formDiv>
+                <div>
+                    <input type="text" id="title" placeholder="Enter a title">
+                </div>
+                <div>
+                    <select id="type">
+                        <option selected="Select type" disabled="disabled">Select Type</option>
+                        <option value="School">School</option>
+                        <option value="Chore">Chore</option>
+                        <option value="Goal">Goal</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="date" id="date">
+                </div>
+                <div>
+                    <button class="buttonStyle" onclick="newElement()" type="button">Add to list</button>
+                    <button type="button">Clear All</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
