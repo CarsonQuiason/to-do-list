@@ -8,8 +8,12 @@ Challenge: To-Do List S20
 <html lang="en">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Saira&display=swap" rel="stylesheet">
         <meta charset="utf-8">
         <style>
+            *{
+                font-family: 'Saira';
+            }
             ::-webkit-scrollbar {
                 width: 10px;
             }
@@ -27,7 +31,7 @@ Challenge: To-Do List S20
                 background: #555;
             }
             body{
-                background-color: white; !important;
+                background-color: white;
             }
             #back{
                 float: left;
@@ -78,6 +82,7 @@ Challenge: To-Do List S20
                 width: 400px;
             }
             .button {
+                font-weight: bold;
                 background-color: white;
                 border: solid;
                 border-width: 1px;
@@ -92,12 +97,12 @@ Challenge: To-Do List S20
             }
             
             .complete{
-                content:url("checkMark.png");
-                background-color: green;
+                background: url("checkMark.png");
+                background-color: transparent;
                 background-repeat: no-repeat;
                 border: none;
-                height: auto;
-                width: auto;
+                height: 20px;
+                width: 20px;
                 vertical-align: middle;
             }
             
@@ -117,6 +122,7 @@ Challenge: To-Do List S20
             }
             
             input[type=text], select{
+                font-weight: bold;
                 width: 100%;
                 padding: 15px 32px;
                 display: inline-block;
@@ -126,6 +132,7 @@ Challenge: To-Do List S20
                 box-sizing: border-box;
             }
             input[type=date]{
+                font-weight: bold;
                 width: 100%;
                 padding: 15px 32px;
                 display: inline-block;
@@ -145,17 +152,18 @@ Challenge: To-Do List S20
                 var typeText = document.getElementById("type").value;
                 var dateText = document.getElementById("date").value;
                 
-                if(titleText == "" || typeText == "Select Type" || dateText == "") {
+                if(titleText === "" || typeText === "Select Type" || dateText === "") {
                     alert("Please fill out all of the fields");
                     return;
                 }
                 
                 var btn = document.createElement('input');
-                btn.type = "button";
+                btn.type = "image";
                 btn.className = "complete";
                 btn.addEventListener("click",function() {
                                      this.closest("tr").remove();
-                                     })
+                                     });
+                btn.src = "checkMark.png";
                 var newRow = tableRef.insertRow();
                 var titleCell = newRow.insertCell(0);
                 var typeCell = newRow.insertCell(1);
@@ -165,12 +173,14 @@ Challenge: To-Do List S20
                 typeCell.append(typeText);
                 dateCell.append(dateText);
                 actionCell.append(btn);
+                clearF();
             }
             
             function toggleTheme(){
                 var buttons = document.getElementsByClassName("button");
                 
                 if(darkMode) {
+                    document.getElementById("theme").innerText = "Theme: Light"
                     document.getElementById("myTable").classList.remove('table-dark');
                     document.body.style.backgroundColor = "#FFFFFF";
                     document.getElementById("h1Title").style.color = "#000000";
@@ -193,6 +203,7 @@ Challenge: To-Do List S20
                 }
                 
                 else{
+                    document.getElementById("theme").innerText = "Theme: Dark"
                     document.getElementById("myTable").classList.add('table-dark');
                     document.body.style.backgroundColor = "#343a40";
                     document.getElementById("h1Title").style.color = "#FFFFFF";
@@ -232,7 +243,7 @@ Challenge: To-Do List S20
     </head>
     <body>
         <button id="back" type="button" class="button">Back</button>
-        <button id="theme" onclick="toggleTheme()" type="button" class="button">Change Theme</button>
+        <button id="theme" onclick="toggleTheme()" type="button" class="button">Theme: Light</button>
         <h1 id="h1Title" ondblclick="changeTitle()">To-Do List</h1>
         <div class="tableContainer">
             <table id="myTable" class="table table-striped">
@@ -249,14 +260,14 @@ Challenge: To-Do List S20
                 </tbody>
             </table>
         </div>
-        <div #formContainer class="formContainer">
+        <div class="formContainer">
             <form class=formDiv>
                 <div>
                     <input type="text" id="title" placeholder="Enter a title">
                 </div>
                 <div>
                     <select id="type">
-                        <option selected="Select type" disabled="disabled">Select Type</option>
+                        <option disabled="disabled">Select Type</option>
                         <option value="School">School</option>
                         <option value="Chore">Chore</option>
                         <option value="Goal">Goal</option>
